@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lk.jiat.app.core.model.User;
 import lk.jiat.app.core.service.UserService;
+import lk.jiat.app.core.util.Encryption;
 
 import java.io.IOException;
 
@@ -26,7 +27,9 @@ public class Register extends HttpServlet {
         String password = request.getParameter("password");
 //        String contact = request.getParameter("contact");
 
-        User user = new User( name,  email,  contact,  password);
+        String encrypt = Encryption.encrypt(password);
+
+        User user = new User( name,  email,  contact,  encrypt);
 
 
         userService.addUser(user);

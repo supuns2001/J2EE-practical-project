@@ -9,10 +9,11 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>ejb</module>
+        <module>auth</module>
         <module>web</module>
         <module>ear</module>
         <module>core</module>
+        <module>product</module>
     </modules>
 
     <properties>

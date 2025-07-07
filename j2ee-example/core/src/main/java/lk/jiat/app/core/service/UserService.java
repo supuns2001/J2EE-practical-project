@@ -10,4 +10,6 @@ public interface UserService {
     void addUser(User user );
     void updateUser(User user );
     void deleteUser(User user );
+
+    boolean validate(String email , String password);
 }

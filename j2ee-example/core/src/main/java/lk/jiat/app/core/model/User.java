@@ -7,9 +7,9 @@ import jakarta.persistence.*;
 @NamedQueries({
         //@NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email = ?1"),
         @NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email =:email"),
-       // @NamedQuery(name = "User.findByEmailAndPassword", query = "select u from User u where u.email =:email and u.password=:password"),
+        @NamedQuery(name = "User.findByEmailAndPassword", query = "select u from User u where u.email =:email and u.password=:password"),
 })
-//@Cacheable(false)
+@Cacheable(false)
 public class User implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,14 +1,12 @@
 <%@ page import="javax.naming.InitialContext" %>
 <%@ page import="lk.jiat.app.core.service.ProductService" %>
 <%@ page import="lk.jiat.app.core.model.Product" %>
-<%@ page import="java.util.List" %>
 <%@ page import="javax.naming.NamingException" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: user
-  Date: 7/6/2025
-  Time: 10:25 PM
+  Date: 7/7/2025
+  Time: 9:44 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,26 +15,14 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Home</h1>
+<h1>Admin Dashboard</h1>
+<a href="${pageContext.request.contextPath}/admin/add_product.jsp">Add Product</a>
 
-<c:if test="${empty pageContext.request.userPrincipal}">
-
-    <a href="${pageContext.request.contextPath}/register.jsp">Register</a>
-    <a href="${pageContext.request.contextPath}/login.jsp">Login</a>
-
-</c:if>
-<c:if test="${not empty pageContext.request.userPrincipal}">
-
-    <a href="${pageContext.request.contextPath}/logout">Logout</a>
-
-</c:if>
-
-
-
+<h1>All Products </h1>
 <%
     try {
         InitialContext ic = new InitialContext();
-        ProductService productService = (ProductService) ic.lookup("lk.jiat.app.core.service.ProductService");
+        ProductService productService = (ProductService) ic.lookup("java:global/j2ee-example-ear/product-module/ProductSessionBean!lk.jiat.app.core.service.ProductService");
         List<Product> products = productService.getAllProduct();
         pageContext.setAttribute("products", products);
     } catch (NamingException e) {
@@ -50,15 +36,19 @@
         <th>Description</th>
         <th>Price</th>
         <th>Quantity</th>
+        <th>Action</th>
     </tr>
     <c:forEach var="product" items="${products}">
         <tr>
             <td>${product.name}</td>
+            <td>${product.description}</td>
             <td>${product.price}</td>
             <td>${product.quantity}</td>
+            <td>
+                <a href="${pageContext.request.contextPath}/admin/delete_product?pid=${product.id}">Delete</a>
+            </td>
         </tr>
     </c:forEach>
 </table>
-
 </body>
 </html>
