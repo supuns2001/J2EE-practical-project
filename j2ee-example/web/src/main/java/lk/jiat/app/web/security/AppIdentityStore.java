@@ -24,7 +24,6 @@ public class AppIdentityStore implements IdentityStore {
 
             if (userService.validate(upc.getCaller(), upc.getPasswordAsString())){
                 User user = userService.getUserByEmail(upc.getCaller());
-
                 return new CredentialValidationResult(user.getEmail(), Set.of(user.getUserType().name()));
             }
 
